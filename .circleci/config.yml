@@ -14,7 +14,8 @@ jobs:
             docker-compose exec -T centos6 /bin/bash -lc "test -f requirements.yml && ansible-galaxy install -r requirements.yml -p roles || true"
             docker-compose exec -T centos6 /bin/bash -lc "ansible-playbook -i localhost, tests.yml -c local"
             docker-compose exec -T centos6 /bin/bash -lc "ansible -i localhost, -c local all -m setup --tree . &>/dev/null"
-            docker-compose exec -T centos6 /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 120s --sleep 60s"
+            docker-compose exec -T centos6 /bin/bash -lc "sleep 60"
+            docker-compose exec -T centos6 /bin/bash -lc "goss --vars localhost -g goss.yml validate"
             docker-compose stop centos6
 
       - run:
@@ -25,7 +26,8 @@ jobs:
             docker-compose exec -T centos7 /bin/bash -lc "test -f requirements.yml && ansible-galaxy install -r requirements.yml -p roles || true"
             docker-compose exec -T centos7 /bin/bash -lc "ansible-playbook -i localhost, tests.yml -c local"
             docker-compose exec -T centos7 /bin/bash -lc "ansible -i localhost, -c local all -m setup --tree . &>/dev/null"
-            docker-compose exec -T centos7 /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 120s --sleep 60s"
+            docker-compose exec -T centos7 /bin/bash -lc "sleep 60"
+            docker-compose exec -T centos7 /bin/bash -lc "goss --vars localhost -g goss.yml validate"
             docker-compose stop centos7
 
       - run:
@@ -36,7 +38,8 @@ jobs:
             docker-compose exec -T debian9 /bin/bash -lc "test -f requirements.yml && ansible-galaxy install -r requirements.yml -p roles || true"
             docker-compose exec -T debian9 /bin/bash -lc "ansible-playbook -i localhost, tests.yml -c local"
             docker-compose exec -T debian9 /bin/bash -lc "ansible -i localhost, -c local all -m setup --tree . &>/dev/null"
-            docker-compose exec -T debian9 /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 120s --sleep 60s"
+            docker-compose exec -T debian9 /bin/bash -lc "sleep 60"
+            docker-compose exec -T debian9 /bin/bash -lc "goss --vars localhost -g goss.yml validate"
             docker-compose stop debian9
 
       - run:
@@ -47,5 +50,6 @@ jobs:
             docker-compose exec -T amazon1 /bin/bash -lc "test -f requirements.yml && ansible-galaxy install -r requirements.yml -p roles || true"
             docker-compose exec -T amazon1 /bin/bash -lc "ansible-playbook -i localhost, tests.yml -c local"
             docker-compose exec -T amazon1 /bin/bash -lc "ansible -i localhost, -c local all -m setup --tree . &>/dev/null"
-            docker-compose exec -T amazon1 /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 120s --sleep 60s"
+            docker-compose exec -T amazon1 /bin/bash -lc "sleep 60"
+            docker-compose exec -T amazon1 /bin/bash -lc "goss --vars localhost -g goss.yml validate"
             docker-compose stop amazon1
