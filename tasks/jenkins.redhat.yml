@@ -1,0 +1,38 @@
+---
+
+  - name: Install base packages
+    yum:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - python-pycurl
+      - java-1.8.0-openjdk
+    tags:
+      - jenkins
+
+  - name: Install jenkins-ci repository key
+    rpm_key:
+      key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+      state: present
+      validate_certs: no
+    tags:
+      - jenkins
+
+  - name: Install jenkins-ci repository
+    yum_repository:
+      name: jenkins-ci
+      description: Jenkins CI yum repository
+      baseurl: http://pkg.jenkins.io/redhat-stable
+      gpgcheck: yes
+    tags:
+      - jenkins
+
+  - name: Install jenkins
+    yum:
+      name: jenkins
+      update_cache: yes
+      state: present
+    notify:
+      - restart jenkins
+    tags:
+      - jenkins
