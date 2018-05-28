@@ -23,4 +23,6 @@
     - docker-compose exec -T ${distro} /bin/bash -lc "cat /var/log/jenkins/jenkins.log"
     - docker-compose exec -T ${distro} /bin/bash -lc "journalctl -u jenkins"
     - docker-compose exec -T ${distro} /bin/bash -lc "cat /etc/sysconfig/jenkins"
+    - docker-compose exec -T ${distro} /bin/bash -lc "cat /var/run/jenkins.pid"
+    - docker-compose exec -T ${distro} /bin/bash -lc "ps auxw | grep -i java"
     - docker-compose stop ${distro}
