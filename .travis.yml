@@ -15,5 +15,5 @@
     - docker-compose exec -T ${distro} /bin/bash -lc "test -f requirements.yml && ansible-galaxy install -r requirements.yml -p roles || true"
     - docker-compose exec -T ${distro} /bin/bash -lc "ansible-playbook -i localhost, tests.yml -c local"
     - docker-compose exec -T ${distro} /bin/bash -lc "ansible -i localhost, -c local all -m setup --tree . &>/dev/null"
-    - docker-compose exec -T ${distro} /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 90s --sleep 15s"
+    - docker-compose exec -T ${distro} /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 600s --sleep 60s"
     - docker-compose stop ${distro}
