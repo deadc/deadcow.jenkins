@@ -4,10 +4,6 @@
     - docker
 
   env:
-    global:
-      - JAVA_OPTS: -Xmx2g
-
-  env:
     - distro: centos6
     - distro: centos7
     - distro: debian9
@@ -19,6 +15,6 @@
     - docker-compose exec -T ${distro} /bin/bash -lc "test -f requirements.yml && ansible-galaxy install -r requirements.yml -p roles || true"
     - docker-compose exec -T ${distro} /bin/bash -lc "ansible-playbook -i localhost, tests.yml -c local"
     - docker-compose exec -T ${distro} /bin/bash -lc "ansible -i localhost, -c local all -m setup --tree . &>/dev/null"
-    - docker-compose exec -T ${distro} /bin/bash -lc "/etc/init.d/jenkins status && cat /var/log/jenkins/jenkins.log"
+    - docker-compose exec -T ${distro} /bin/bash -lc "/etc/init.d/jenkins status && cat /var/log/jenkins/jenkins.log && journalctl -xef"
     - docker-compose exec -T ${distro} /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 60s --sleep 5s"
     - docker-compose stop ${distro}
