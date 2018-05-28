@@ -6,6 +6,8 @@
   env:
     global:
       - JAVA_OPTS: -Xmx2g
+
+  env:
     - distro: centos6
     - distro: centos7
     - distro: debian9
