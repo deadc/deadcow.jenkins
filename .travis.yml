@@ -4,13 +4,13 @@
     - docker
 
   env:
-    - distro: centos6
-    - distro: centos7
-    - distro: debian9
-    - distro: amazon1
     global:
+      - distro: centos6
+      - distro: centos7
+      - distro: debian9
+      - distro: amazon1
       - JAVA_OPTS: -Xmx2g
-      
+
   script:
     - docker-compose up -d ${distro}
     - docker-compose exec -T ${distro} /bin/bash -lc "ln -nfs roles/test/*.yml ."
