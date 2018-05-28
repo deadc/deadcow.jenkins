@@ -13,11 +13,15 @@
   script:
     - docker-compose up -d ${distro}
     - docker-compose exec -T ${distro} /bin/bash -lc "ln -nfs roles/test/*.yml ."
-    # fix CentOS7 localhost.localdomain problem (IDKW!)
+    # tempfix CentOS7 localhost.localdomain problem (IDKW!)
     - docker-compose exec -T ${distro} /bin/bash -lc "echo 127.0.0.1 localhost localhost.localdomain >> /etc/hosts"
     - docker-compose exec -T ${distro} /bin/bash -lc "test -f requirements.yml && ansible-galaxy install -r requirements.yml -p roles || true"
     - docker-compose exec -T ${distro} /bin/bash -lc "ansible-playbook -i localhost, tests.yml -c local"
     - docker-compose exec -T ${distro} /bin/bash -lc "ansible -i localhost, -c local all -m setup --tree . &>/dev/null"
+    - docker-compose exec -T ${distro} /bin/bash -lc "journalctl -xe"
+    - docker-compose exec -T ${distro} /bin/bash -lc "systemctl status jenkins"
+    - docker-compose exec -T ${distro} /bin/bash -lc "sleep 60 && cat /var/log/jenkins/jenkins.log"
+
     # tempfix java/jenkins pidof name problem
     - docker-compose exec -T ${distro} /bin/bash -lc "test -e /var/run/jenkins.pid && pidof java > /var/run/jenkins.pid || pidof java > /var/run/jenkins/jenkins.pid"
     - docker-compose exec -T ${distro} /bin/bash -lc "goss --vars localhost -g goss.yml validate --retry-timeout 60s --sleep 5s"
