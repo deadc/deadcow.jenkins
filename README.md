@@ -1,7 +1,7 @@
 Jenkins
 =========
 
-[![CircleCI](https://circleci.com/gh/deadc/deadcow.jenkins/tree/master.svg?style=shield)](https://circleci.com/gh/deadc/deadcow.jenkins/tree/master)
+[![Travis-CI](https://travis-ci.org/deadc/deadcow.jenkins.svg?branch=master)](https://travis-ci.org/deadc/deadcow.jenkins)
 
 Jenkins é um servidor de Integração Contínua open-source feito em Java, pode ser rodado de forma standalone ou como uma web aplicação dentro de um servidor web.
 
